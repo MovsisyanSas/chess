@@ -10,501 +10,321 @@
 
 
 class figure {
+protected:
+	std::string white = "white";
+	std::string black = "black";
 public:
 	virtual void move() = 0;
 	virtual void color() = 0;
-	virtual void name() = 0;
+	virtual void Name() = 0;
+	virtual ~figure() {}
 };
 
-class White :public figure {
-protected:
-	std::string Color = "white";
-public:
-	virtual void move() = 0;
-	virtual void color() {
-		std::cout << "Color: " << Color << std::endl;
-	}
-	virtual void name() = 0;
-};
-
-
-class Wking : public White {
+class king : public figure {
 private:
 	int MaxDistance;
-	std::string Kname;
+	std::string name;
+	std::string Color;
 public:
-	Wking() {
-		MaxDistance = 1;
-		Kname = "King";
+	king() {
+		std::cout << "Error: enter color " << std::endl;
+	}
+	king(std::string Col) {
+		if (Col == figure::white || Col == figure::black) {
+			Color = Col;
+			MaxDistance = 1;
+			name = "king";
+		}
+		else {
+			std::cout << "Error: enter color white or black " << std::endl;
+		}
 	}
 	void move() override {
 		std::cout << "can move by " << MaxDistance << " cells" << std::endl;
 	}
 	void color() override {
-		std::cout << "Figure color: " << White::Color << std::endl;
+		std::cout << "Figure color: " << Color << std::endl;
 	}
-	void name() override {
-		std::cout << "Figure name: " << Kname << std::endl;
+	void Name() override {
+		std::cout << "Figure name: " << name << std::endl;
 	}
-	Wking(const Wking& obj) {
+	king(const king& obj) {
 		this->Color = obj.Color;
 		this->MaxDistance = obj.MaxDistance;
-		this->Kname = obj.Kname;
+		this->name = obj.name;
 	}
-	Wking& operator = (const Wking& obj) {
+	king& operator = (const king& obj) {
 		if (this != &obj)
 		{
 			this->Color = obj.Color;
 			this->MaxDistance = obj.MaxDistance;
-			this->Kname = obj.Kname;
+			this->name = obj.name;
 		}
 		return *this;
 	}
+	~king() override {}
 };
-class Wqueen : public White {
+class queen : public figure {
 	int MaxDistance;
-	std::string Qname;
+	std::string name;
 	std::string movestyle;
+	std::string Color;
 public:
-	Wqueen() {
-		MaxDistance = 8;
-		Qname = "queen";
-		movestyle = "by diagonal/horizontal/vertical ways";
+	queen() {
+		std::cout << "Error: enter color " << std::endl;
+	}
+	queen(std::string Col) {
+		if (Col == figure::white || Col == figure::black)
+		{
+			Color = Col;
+			MaxDistance = 8;
+			name = "queen";
+			movestyle = "by diagonal/horizontal/vertical ways";
+		}
+		else {
+			std::cout << "Error: enter color white or black " << std::endl;
+		}
 	}
 	void move() override {
 		std::cout << "can move by " << MaxDistance << " cells(maximum)" << std::endl;
 		std::cout << "Movestyle: " << movestyle << std::endl;
 	}
 	void color() override {
-		std::cout << "Figure color: " << White::Color << std::endl;
+		std::cout << "Figure color: " << Color << std::endl;
 	}
-	void name() override {
-		std::cout << "Figure name: " << Qname << std::endl;
+	void Name() override {
+		std::cout << "Figure name: " << name << std::endl;
 	}
-	Wqueen(const Wqueen& obj) {
+	queen(const queen& obj) {
 		this->Color = obj.Color;
 		this->MaxDistance = obj.MaxDistance;
-		this->Qname = obj.Qname;
+		this->name = obj.name;
 		this->movestyle = obj.movestyle;
 	}
-	Wqueen& operator = (const Wqueen& obj) {
+	queen& operator = (const queen& obj) {
 		if (this != &obj)
 		{
 			this->Color = obj.Color;
 			this->MaxDistance = obj.MaxDistance;
-			this->Qname = obj.Qname;
+			this->name = obj.name;
 			this->movestyle = obj.movestyle;
 		}
 		return *this;
 	}
+	~queen() override {}
 };
-class Wbishop : public White {
+class bishop : public figure {
 	int AvailableQuantity;
 	int MaxDistance;
-	std::string Bname;
+	std::string name;
 	std::string movestyle;
+	std::string Color;
 public:
-	Wbishop() {
-		MaxDistance = 8;
-		Bname = "bishop";
-		movestyle = "by diagonal way";
-		AvailableQuantity = 2;
+	bishop() {
+		std::cout << "Error: enter color " << std::endl;
+	}
+	bishop(std::string Col) {
+		if (Col == figure::white || Col == figure::black)
+		{
+			Color = Col;
+			MaxDistance = 8;
+			name = "bishop";
+			movestyle = "by diagonal way";
+			AvailableQuantity = 2;
+		}
+		else {
+			std::cout << "Error: enter color white or black " << std::endl;
+		}
 	}
 	void move() override {
 		std::cout << "can move by " << MaxDistance << " cells(maximum)" << std::endl;
 		std::cout << "Movestyle: " << movestyle << std::endl;
 	}
 	void color() override {
-		std::cout << "Figure color: " << White::Color << std::endl;
+		std::cout << "Figure color: " << Color << std::endl;
 	}
-	void name() override {
-		std::cout << "Figure name: " << Bname << std::endl;
+	void Name() override {
+		std::cout << "Figure name: " << name << std::endl;
 	}
-	Wbishop(const Wbishop& obj) {
+	bishop(const bishop& obj) {
 		this->Color = obj.Color;
 		this->MaxDistance = obj.MaxDistance;
-		this->Bname = obj.Bname;
+		this->name = obj.name;
 		this->movestyle = obj.movestyle;
 		this->AvailableQuantity = obj.AvailableQuantity;
 	}
-	Wbishop& operator = (const Wbishop& obj) {
+	bishop& operator = (const bishop& obj) {
 		if (this != &obj)
 		{
 			this->Color = obj.Color;
 			this->MaxDistance = obj.MaxDistance;
-			this->Bname = obj.Bname;
+			this->name = obj.name;
 			this->movestyle = obj.movestyle;
 			this->AvailableQuantity = obj.AvailableQuantity;
 		}
 		return *this;
 	}
+	~bishop() override {}
 };
-class Whorse : public White {
+class horse : public figure {
 	int MaxDistance;
-	std::string Hname;
+	std::string name;
 	std::string movestyle;
+	std::string Color;
 	int AvailableQuantity;
 public:
-	Whorse() {
-		MaxDistance = std::pow(0.5, 5); //square root of 2^2+1^1 cause it goes 2 cells to one way and 1 cell vertically 
-		Hname = "horse";
-		movestyle = "by 2 cells to one way of four cardinal directions and 1 cell vertically to last one";
+	horse() {
+		std::cout << "Error: enter color " << std::endl;
+	}
+	horse(std::string Col) {
+		if (Col == figure::white || Col == figure::black)
+		{
+			Color = Col;
+			MaxDistance = std::pow(0.5, 5); //square root of 2^2+1^1 cause it goes 2 cells to one way and 1 cell vertically 
+			name = "horse";
+			movestyle = "by 2 cells to one way of four cardinal directions and 1 cell vertically to last one";
+		}
+		else {
+			std::cout << "Error: enter color white or black " << std::endl;
+		}
 	}
 	void move() override {
 		std::cout << "can move by " << MaxDistance << " cells" << std::endl;
 		std::cout << "Movestyle: " << movestyle << std::endl;
 	}
 	void color() override {
-		std::cout << "Figure color: " << White::Color << std::endl;
+		std::cout << "Figure color: " << Color << std::endl;
 	}
-	void name() override {
-		std::cout << "Figure name: " << Hname << std::endl;
+	void Name() override {
+		std::cout << "Figure name: " << name << std::endl;
 	}
-	Whorse(const Whorse& obj) {
+	horse(const horse& obj) {
 		this->Color = obj.Color;
 		this->MaxDistance = obj.MaxDistance;
-		this->Hname = obj.Hname;
+		this->name = obj.name;
 		this->movestyle = obj.movestyle;
 		this->AvailableQuantity = obj.AvailableQuantity;
 	}
-	Whorse& operator = (const Whorse& obj) {
+	horse& operator = (const horse& obj) {
 		if (this != &obj)
 		{
 			this->Color = obj.Color;
 			this->MaxDistance = obj.MaxDistance;
-			this->Hname = obj.Hname;
+			this->name = obj.name;
 			this->movestyle = obj.movestyle;
 			this->AvailableQuantity = obj.AvailableQuantity;
 		}
 		return *this;
 	}
+	~horse() override {}
 };
-class Wrook : public White {
+class rook : public figure {
 	int MaxDistance;
-	std::string Rname;
+	std::string name;
 	std::string movestyle;
+	std::string Color;
 	int AvailableQuantity;
 public:
-	Wrook() {
-		MaxDistance = 8;
-		Rname = "rook";
-		movestyle = "by vertical/horizontal ways";
-		AvailableQuantity = 2;
+	rook() {
+		std::cout << "Error: enter color " << std::endl;
+	}
+	rook(std::string Col) {
+		if (Col == figure::white || Col == figure::black)
+		{
+			Color = Col;
+			MaxDistance = 8;
+			name = "rook";
+			movestyle = "by vertical/horizontal ways";
+			AvailableQuantity = 2;
+		}
+		else {
+			std::cout << "Error: enter color white or black " << std::endl;
+		}
 	}
 	void move() override {
 		std::cout << "can move by " << MaxDistance << " cells(maximum)" << std::endl;
 		std::cout << "Movestyle: " << movestyle << std::endl;
 	}
 	void color() override {
-		std::cout << "Figure color: " << White::Color << std::endl;
+		std::cout << "Figure color: " << Color << std::endl;
 	}
-	void name() override {
-		std::cout << "Figure name: " << Rname << std::endl;
+	void Name() override {
+		std::cout << "Figure name: " << name << std::endl;
 	}
-	Wrook(const Wrook& obj) {
+	rook(const rook& obj) {
 		this->Color = obj.Color;
 		this->MaxDistance = obj.MaxDistance;
-		this->Rname = obj.Rname;
+		this->name = obj.name;
 		this->movestyle = obj.movestyle;
 		this->AvailableQuantity = obj.AvailableQuantity;
 	}
-	Wrook& operator = (const Wrook& obj) {
+	rook& operator = (const rook& obj) {
 		if (this != &obj)
 		{
 			this->Color = obj.Color;
 			this->MaxDistance = obj.MaxDistance;
-			this->Rname = obj.Rname;
+			this->name = obj.name;
 			this->movestyle = obj.movestyle;
 			this->AvailableQuantity = obj.AvailableQuantity;
 		}
 		return *this;
 	}
+	~rook() override {}
 };
-class Wpaw : public White {
+class paw : public figure {
 	int MaxDistance;
-	std::string Pname;
+	std::string name;
 	std::string movestyle;
+	std::string Color;
 	int AvailableQuantity;
 public:
-	Wpaw() {
-		MaxDistance = 2;
-		Pname = "paw";
-		movestyle = "ahead (or vertically ahead in some cases)";
-		AvailableQuantity = 8;
+	paw() {
+		std::cout << "Error: enter color " << std::endl;
+	}
+	paw(std::string Col) {
+		if (Col == figure::white || Col == figure::black)
+		{
+			Color = Col;
+			MaxDistance = 2;
+			name = "paw";
+			movestyle = "ahead (or vertically ahead in some cases)";
+			AvailableQuantity = 8;
+		}
+		else {
+			std::cout << "Error: enter color white or black " << std::endl;
+		}
 	}
 	void move() override {
 		std::cout << "can move by " << MaxDistance << " cells(maximum)" << std::endl;
 		std::cout << "Movestyle: " << movestyle << std::endl;
 	}
 	void color() override {
-		std::cout << "Figure color: " << White::Color << std::endl;
+		std::cout << "Figure color: " << Color << std::endl;
 	}
-	void name() override {
-		std::cout << "Figure name: " << Pname << std::endl;
+	void Name() override {
+		std::cout << "Figure name: " << name << std::endl;
 	}
-	Wpaw(const Wpaw& obj) {
+	paw(const paw& obj) {
 		this->Color = obj.Color;
 		this->MaxDistance = obj.MaxDistance;
-		this->Pname = obj.Pname;
+		this->name = obj.name;
 		this->movestyle = obj.movestyle;
 		this->AvailableQuantity = obj.AvailableQuantity;
 	}
-	Wpaw& operator = (const Wpaw& obj) {
+	paw& operator = (const paw& obj) {
 		if (this != &obj)
 		{
 			this->Color = obj.Color;
 			this->MaxDistance = obj.MaxDistance;
-			this->Pname = obj.Pname;
+			this->name = obj.name;
 			this->movestyle = obj.movestyle;
 			this->AvailableQuantity = obj.AvailableQuantity;
 		}
 		return *this;
 	}
+	~paw() override {}
 };
 
-class Black :public figure {
-protected:
-	std::string Color = "black";
-public:
-	virtual void move() = 0;
-	virtual void color() {
-		std::cout << "Color: " << Color << std::endl;
-	}
-	virtual void name() = 0;
-};
-class Bking : public Black {
-private:
-	int MaxDistance;
-	std::string Kname;
-public:
-	Bking() {
-		MaxDistance = 1;
-		Kname = "King";
-	}
-	void move() override {
-		std::cout << "can move by " << MaxDistance << " cells" << std::endl;
-	}
-	void color() override {
-		std::cout << "Figure color: " << Black::Color << std::endl;
-	}
-	void name() override {
-		std::cout << "Figure name: " << Kname << std::endl;
-	}
-	Bking(const Bking& obj) {
-		this->Color = obj.Color;
-		this->MaxDistance = obj.MaxDistance;
-		this->Kname = obj.Kname;
-	}
-	Bking& operator = (const Bking& obj) {
-		if (this != &obj)
-		{
-			this->Color = obj.Color;
-			this->MaxDistance = obj.MaxDistance;
-			this->Kname = obj.Kname;
-		}
-		return *this;
-	}
-};
-class Bqueen : public Black {
-	int MaxDistance;
-	std::string Qname;
-	std::string movestyle;
-public:
-	Bqueen() {
-		MaxDistance = 8;
-		Qname = "queen";
-		movestyle = "by diagonal/horizontal/vertical ways";
-	}
-	void move() override {
-		std::cout << "can move by " << MaxDistance << " cells(maximum)" << std::endl;
-		std::cout << "Movestyle: " << movestyle << std::endl;
-	}
-	void color() override {
-		std::cout << "Figure color: " << Black::Color << std::endl;
-	}
-	void name() override {
-		std::cout << "Figure name: " << Qname << std::endl;
-	}
-	Bqueen(const Bqueen& obj) {
-		this->Color = obj.Color;
-		this->MaxDistance = obj.MaxDistance;
-		this->Qname = obj.Qname;
-		this->movestyle = obj.movestyle;
-	}
-	Bqueen& operator = (const Bqueen& obj) {
-		if (this != &obj)
-		{
-			this->Color = obj.Color;
-			this->MaxDistance = obj.MaxDistance;
-			this->Qname = obj.Qname;
-			this->movestyle = obj.movestyle;
-		}
-		return *this;
-	}
-};
-class Bbishop : public Black {
-	int AvailableQuantity;
-	int MaxDistance;
-	std::string Bname;
-	std::string movestyle;
-public:
-	Bbishop() {
-		MaxDistance = 8;
-		Bname = "bishop";
-		movestyle = "by diagonal way";
-		AvailableQuantity = 2;
-	}
-	void move() override {
-		std::cout << "can move by " << MaxDistance << " cells(maximum)" << std::endl;
-		std::cout << "Movestyle: " << movestyle << std::endl;
-	}
-	void color() override {
-		std::cout << "Figure color: " << Black::Color << std::endl;
-	}
-	void name() override {
-		std::cout << "Figure name: " << Bname << std::endl;
-	}
-	Bbishop(const Bbishop& obj) {
-		this->Color = obj.Color;
-		this->MaxDistance = obj.MaxDistance;
-		this->Bname = obj.Bname;
-		this->movestyle = obj.movestyle;
-		this->AvailableQuantity = obj.AvailableQuantity;
-	}
-	Bbishop& operator = (const Bbishop& obj) {
-		if (this != &obj)
-		{
-			this->Color = obj.Color;
-			this->MaxDistance = obj.MaxDistance;
-			this->Bname = obj.Bname;
-			this->movestyle = obj.movestyle;
-			this->AvailableQuantity = obj.AvailableQuantity;
-		}
-		return *this;
-	}
-};
-class Bhorse : public Black {
-	int MaxDistance;
-	std::string Hname;
-	std::string movestyle;
-	int AvailableQuantity;
-public:
-	Bhorse() {
-		MaxDistance = std::pow(0.5, 5); //square root of 2^2+1^1 cause it goes 2 cells to one way and 1 cell vertically 
-		Hname = "horse";
-		movestyle = "by 2 cells to one way of four cardinal directions and 1 cell vertically to last one";
-	}
-	void move() override {
-		std::cout << "can move by " << MaxDistance << " cells" << std::endl;
-		std::cout << "Movestyle: " << movestyle << std::endl;
-	}
-	void color() override {
-		std::cout << "Figure color: " << Black::Color << std::endl;
-	}
-	void name() override {
-		std::cout << "Figure name: " << Hname << std::endl;
-	}
-	Bhorse(const Bhorse& obj) {
-		this->Color = obj.Color;
-		this->MaxDistance = obj.MaxDistance;
-		this->Hname = obj.Hname;
-		this->movestyle = obj.movestyle;
-		this->AvailableQuantity = obj.AvailableQuantity;
-	}
-	Bhorse& operator = (const Bhorse& obj) {
-		if (this != &obj)
-		{
-			this->Color = obj.Color;
-			this->MaxDistance = obj.MaxDistance;
-			this->Hname = obj.Hname;
-			this->movestyle = obj.movestyle;
-			this->AvailableQuantity = obj.AvailableQuantity;
-		}
-		return *this;
-	}
-};
-class Brook : public Black {
-	int MaxDistance;
-	std::string Rname;
-	std::string movestyle;
-	int AvailableQuantity;
-public:
-	Brook() {
-		MaxDistance = 8;
-		Rname = "rook";
-		movestyle = "by vertical/horizontal ways";
-		AvailableQuantity = 2;
-	}
-	void move() override {
-		std::cout << "can move by " << MaxDistance << " cells(maximum)" << std::endl;
-		std::cout << "Movestyle: " << movestyle << std::endl;
-	}
-	void color() override {
-		std::cout << "Figure color: " << Black::Color << std::endl;
-	}
-	void name() override {
-		std::cout << "Figure name: " << Rname << std::endl;
-	}
-	Brook(const Brook& obj) {
-		this->Color = obj.Color;
-		this->MaxDistance = obj.MaxDistance;
-		this->Rname = obj.Rname;
-		this->movestyle = obj.movestyle;
-		this->AvailableQuantity = obj.AvailableQuantity;
-	}
-	Brook& operator = (const Brook& obj) {
-		if (this != &obj)
-		{
-			this->Color = obj.Color;
-			this->MaxDistance = obj.MaxDistance;
-			this->Rname = obj.Rname;
-			this->movestyle = obj.movestyle;
-			this->AvailableQuantity = obj.AvailableQuantity;
-		}
-		return *this;
-	}
-};
-class Bpaw : public Black {
-	int MaxDistance;
-	std::string Pname;
-	std::string movestyle;
-	int AvailableQuantity;
-public:
-	Bpaw() {
-		MaxDistance = 2;
-		Pname = "paw";
-		movestyle = "ahead (or vertically ahead in some cases)";
-		AvailableQuantity = 8;
-	}
-	void move() override {
-		std::cout << "can move by " << MaxDistance << " cells(maximum)" << std::endl;
-		std::cout << "Movestyle: " << movestyle << std::endl;
-	}
-	void color() override {
-		std::cout << "Figure color: " << Black::Color << std::endl;
-	}
-	void name() override {
-		std::cout << "Figure name: " << Pname << std::endl;
-	}
-	Bpaw(const Bpaw& obj) {
-		this->Color = obj.Color;
-		this->MaxDistance = obj.MaxDistance;
-		this->Pname = obj.Pname;
-		this->movestyle = obj.movestyle;
-		this->AvailableQuantity = obj.AvailableQuantity;
-	}
-	Bpaw& operator = (const Bpaw& obj) {
-		if (this != &obj)
-		{
-			this->Color = obj.Color;
-			this->MaxDistance = obj.MaxDistance;
-			this->Pname = obj.Pname;
-			this->movestyle = obj.movestyle;
-			this->AvailableQuantity = obj.AvailableQuantity;
-		}
-		return *this;
-	}
-};
 
 //just creation, i will use this class and enum later
 //<------------------------------------------------------------------------------------------------------->
@@ -617,26 +437,44 @@ public:
 };
 //<------------------------------------------------------------------------------------------------------->
 void White() {
-	Wking wking;
-	Wqueen wqueen;
-	Wbishop wbishop1;
-	Wbishop wbishop2;
-	Whorse whorse1;
-	Whorse whorse2;
-	Wrook wrook1;
-	Wrook wrook2;
+	king wk("white");
+	queen wq("white");
+	bishop wb1("white");
+	bishop wb2("white");
+	horse wh1("white");
+	horse wh2("white");
+	rook wr1("white");
+	rook wr2("white");
+	paw wp1("white");
+	paw wp2("white");
+	paw wp3("white");
+	paw wp4("white");
+	paw wp5("white");
+	paw wp6("white");
+	paw wp7("white");
+	paw wp8("white");
+
 }
 
 void Black() {
-	Bking bking;
-	Bqueen bqueen;
-	Bbishop bbishop1;
-	Bbishop bbishop2;
-	Bhorse bhorse1;
-	Bhorse bhorse2;
-	Brook brook1;
-	Brook bsrook2;
+	king bk("black");
+	queen bq("black");
+	bishop bb1("black");
+	bishop bb2("black");
+	horse bh1("black");
+	horse bh2("black");
+	rook br1("black");
+	rook br2("black");
+	paw bp1("black");
+	paw bp2("black");
+	paw bp3("black");
+	paw bp4("black");
+	paw bp5("black");
+	paw bp6("black");
+	paw bp7("black");
+	paw bp8("black");
 }
+
 void setup() {
 	board Board;
 	White();
